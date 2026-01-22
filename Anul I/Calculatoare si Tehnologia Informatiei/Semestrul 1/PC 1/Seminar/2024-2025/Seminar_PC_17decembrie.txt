@@ -1,0 +1,343 @@
+//ex. 3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int comparatie(const void *a, const void *b)
+{
+    return (*(char *)a - *(char *)b);
+}
+int main() 
+{
+    char v[1001];
+    int n;
+    scanf("%s", v);
+    n = strlen(v);
+    qsort(v, n, sizeof(char), comparatie);
+    printf("%s", v);
+    return 0;
+}
+
+//ex.2
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+
+char* concat1(int n, ...)
+{
+    va_list args1; //args2;
+    va_start(args1, n);
+    //va_start(args2, n);
+    //parcurge lista de argumente(sirurile) pentru a stabili cate caractere vor fi in sirul final
+    int lt = 0;//lungimea sirului rezultat
+    for (int i = 0; i < n; i++) {
+        char* str = va_arg(args1, char*);
+        lt += strlen(str);
+    }
+    va_end(args1);// precizare final lista argumente
+    
+     va_start(args1, n);
+    //alocam spatiu = lt+1 (pentru '\0') pentru sirul final
+    char* result = (char*)malloc((lt + 1) * sizeof(char));
+    //initial sirul este vid
+    result[0] = '\0';
+    //parcurgem lista de argumente si concatenam in sirul numit result
+    for (int i = 0; i < n; i++) {
+        char* str = va_arg(args1, char*);
+        strcat(result, str);
+    }
+    va_end(args1);// precizare final lista argumente
+    return result;
+}
+
+ 
+
+int main() {
+
+    char* s = concat1(3, "Test", " ", "apel");
+    if (s) {
+        printf("Rezultat: %s\n", s);
+        free(s);//eliberare, dupa malloc
+    }
+
+    return 0;
+
+}
+
+//ex3 varianta cu functie ca argument al unei functii cu numar variabil de argumnete
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+
+int lungime(int n, ...) { //functie care determina lungimea sirului final prin insumarea strlen a tuturor argumentelor
+    va_list arg;
+    va_start(arg, n);
+    int len = 0;
+    for (int i = 0; i < n; i++) {
+        const char *s = va_arg(arg, const char *);
+        len += strlen(s);
+    }
+    va_end(arg);
+    return len;
+}
+
+char *concat1(int len, int n, ...) { //functia care concateneaza sirurile primite ca argument
+    va_list arg;
+    va_start(arg, n);
+    
+    char *sir = (char *)malloc((len + 1) * sizeof(char));
+    
+    sir[0] = '\0'; //initializarea sirului final
+
+    for (int i = 0; i < n; i++) {
+        const char *s = va_arg(arg, const char *);
+        strcat(sir, s);
+    }
+    
+    va_end(arg);
+    return sir;
+}
+
+int main() {
+    int l = lungime(3, "eu ", "vreau ", "sa iau nota mare la PC");
+    printf("%d\n", l);
+
+    char *sir = concat1(l, 3, "eu ", "vreau ", "sa iau nota mare la PC");
+    printf("%s\n", sir);
+
+    free(sir); //eliberarea spatiului pentru a preveni scurgeri de memorie si erori de tip segmentation fault
+
+    return 0;
+}
+
+/*State Tudor-Alexandru
+Rezolvare probleme 1 seminar 6*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int comparaCresc(const void* a, const void* b)
+{
+    return (*(int*)a - *(int*)b);
+}
+
+int comparaDesc(const void* a, const void* b)
+{
+    return -(*(int*)a - *(int*)b);
+}
+
+int main()
+{
+    int n;
+    printf("Introduceti nr de elemente: ");
+    scanf("%d", &n);
+
+    int v[n];
+
+    printf("Introduceti vectorul: ");
+    for(int i = 0; i < n; i++)
+        scanf("%d", &v[i]);
+
+    qsort(v, n, sizeof(int), comparaCresc);
+
+    for(int i = 0; i < n; i++)
+       printf("%d ", v[i]);
+
+    printf("\n");
+
+    qsort(v, n, sizeof(int), comparaDesc);
+
+    for(int i = 0; i < n; i++)
+       printf("%d ", v[i]);
+
+    return 0;
+}
+
+// problema 2 seminar 6 
+//ordonare prima jumatate crescator a doua descrescator
+#include <stdio.h>
+#include <stdlib.h>
+
+int comparedes(const void* a, const void* b) {
+   return (*(int*)b - *(int*)a);
+}
+int comparecres(const void* a, const void* b) {
+   return (*(int*)a  - *(int*)b );
+}
+
+int main() {
+   int n,i, a[100];
+   scanf("%d", &n);
+   for (i=0;i<n;i++)
+    scanf("%d", &a[i]);
+   qsort(a, n/2, sizeof(int), comparecres);
+   qsort((a+(n/2)), n-n/2, sizeof(int), comparedes);//n-n-2 pentru a lua in considerare cazul n impar!
+   
+
+   printf("Sirul ordonat este: ");
+   
+   for (i = 0; i < n; ++i) {
+      printf("%d ", a[i]);
+   }
+   printf("\n");
+   return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+
+char *concat1(int n, ...) {
+    va_list siruri_1;
+    va_start(siruri_1, n);
+
+    static int lt=0;
+    char *sirCurent;
+    for(int i = 0; i < n; i++) {
+        sirCurent = va_arg(siruri_1, char*);
+        lt += sizeof(sirCurent);
+    }
+    va_end(siruri_1);
+    
+    va_list siruri_2;
+    va_start(siruri_2, n);
+    
+    char *rez = (char*)malloc( (lt + 1) * sizeof(char) );
+    strcpy(rez, "");
+    
+    for(int i = 0; i < n; i++) {
+        sirCurent = va_arg(siruri_2, char*);
+        strcat(rez, sirCurent);
+    }
+    va_end(siruri_2);
+    return rez;
+}
+
+int main() {
+
+    char *rez, *rezultat = concat1(9, "The ", "quick ", "brown ", "fox ", "jumps ", "over ", "the ", "lazy ", "dog ");
+    printf("%s", rezultat);
+    free(rez);
+}
+
+//ex 6
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LEN 1000
+
+void inlocuiesteSubsir(char *w, const char *s, const char *t) {
+    char rez[MAX_LEN] = "";
+    int i = 0, j = 0, k, s_len = strlen(s), t_len = strlen(t);
+
+    while (w[i] != '\0') {
+        if (strncmp(&w[i], s, s_len) == 0) {
+            for (k = 0; k < t_len; k++) {
+                rez[j++] = t[k];
+            }
+            i += s_len;
+        } else {
+            rez[j++] = w[i++];
+        }
+    }
+    rez[j] = '\0';
+    strcpy(w, rez);
+}
+
+int main() {
+    char w[MAX_LEN] = "dereferentierea";
+    const char *s = "ere";
+    const char *t = "a";
+    inlocuiesteSubsir(w, s, t);
+    printf("%s\n", w);
+
+    return 0;
+}
+
+//Exercitiul 6 - Diaconescu Andrei-Teodor 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void func(char *s, char *p1, char *p2){
+    char *p, *temp;
+    p = strstr(s, p1);
+    temp = (char *)malloc(sizeof(char));
+    
+    while(p){
+        temp = realloc(temp, sizeof(char)*strlen(p)+1);
+        strcpy(temp, p+strlen(p1));
+        s = realloc(s, sizeof(s)+1+(strlen(p2)-strlen(p1)));
+        strcpy(p, p2);
+        strcpy(p+strlen(p2), temp);
+        p = strstr(p+strlen(p2),p1);
+    }
+}
+
+int main(){
+    int i = 0;
+    char c, *s = (char*)malloc(sizeof(char)+1);
+    c = getchar();
+    while(c !='\n'){
+        s[i] = c; i++;
+         s = realloc(s, sizeof(char)*i+1);
+         c = getchar();
+    }
+    s[i] = '\0';
+    func(s, "er", "off");
+    printf("%s", s);
+    
+    free(s);
+    return 0;
+    
+}
+
+/*State Tudor-Alexandru
+Rezolvare problema 7 seminar 6*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+
+void concatenare(int n, ...)
+{
+    va_list siruri;
+    va_start(siruri, n);
+    char *sir = (char*)calloc(2, sizeof(char));
+    
+    if(sir == NULL)
+    {
+        fprintf(stderr, "Eroare la alocare\n");
+        return;
+    }
+    
+    sir[1] = '\0';
+    
+    for(int i = 0; i < n; i++)
+    {
+        char *aux = va_arg(siruri, char*);
+        sir = (char*)realloc(sir, (strlen(aux) + 1 + strlen(sir)) * sizeof(char));
+        
+        if(sir == NULL)
+        {
+            fprintf(stderr, "Eroare la realocare\n");
+            return;
+        }
+        
+        //sir[strlen(sir)] = '\0';
+        strcat(sir, aux);
+    }
+    
+    printf("%s\n", sir);
+    free(sir);
+    va_end(siruri);
+}
+
+int main()
+{
+    concatenare(3, "Ana", " are", " mere si pere");
+    return 0;
+}

@@ -1,0 +1,178 @@
+//Seminar PC nr. 6 / 10.12.2024
+
+//ex. 2
+/*Folositi functia qsort pentru a ordona crescator prima jumătate a unui tablou de numere intregi și descrescător a doua jumătatea aceluiași tablou. */
+#include <stdbool.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+int compcresc(const void *a, const void *b) {
+return (*(int*)a - *(int*)b);
+}
+
+int compdesc(const void *a, const void *b) {
+return (*(int*)b - *(int*)a);
+}
+
+// int compdesc(const int * a, const int * b)
+// {
+//     return *b - *a;
+// }multe warning-uri!
+
+int main() {
+    int v[101];
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++) {
+        scanf("%d",&v[i]);
+    }
+    int m=n/2;
+    
+    qsort(v,m,sizeof(int),compcresc);
+    
+    qsort(v+m,n-m,sizeof(int),compdesc);
+    
+    for(int i=0;i<n;i++) {
+        printf("%d ",v[i]);
+    }
+
+    return 0;
+}
+
+//ex. 3
+/*Folositi functia qsort pentru a ordona alfabetic un sir de caractere. */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int alfabetic(const void* x, const void* y)
+{
+    //return strcmp((char*)x, (char*)y);
+    return *(char*)x-*(char*)y;
+}
+
+int main()
+{
+    char sir[200];
+    printf("introduceti sirul: ");
+    scanf("%s", sir);
+    qsort(sir, strlen(sir), sizeof(char), alfabetic);
+    printf("sirul sortat este: ");
+    printf("%s", sir);
+
+    return 0;
+}
+
+//ex. 6
+/*Scrieți o funcție care să înlocuiască toate aparițiile unui șir 𝑠 într-un șir 𝑤 cu un șir 𝑡. */
+#include <stdio.h>
+#include <string.h>
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LEN 1000
+
+void inlocuieste(char *w, const char *s, const char *t) {
+    char result[MAX_LEN];
+    int i, j = 0, k;
+    int len_w = strlen(w);
+    int len_s = strlen(s);
+    int len_t = strlen(t);
+
+    for (i = 0; i < len_w; i++) {
+        if (strncmp(&w[i], s, len_s) == 0) {
+            for (k = 0; k < len_t; k++) {
+                result[j++] = t[k];
+            }
+            i += len_s - 1;
+        } else {
+
+            result[j++] = w[i];
+        }
+    }
+    result[j] = '\0';
+    strcpy(w, result);
+}
+
+int main() {
+    char w[MAX_LEN];
+    char s[MAX_LEN];
+    char t[MAX_LEN];
+
+    printf("Introdu sirul w: ", MAX_LEN - 1);
+    fgets(w, MAX_LEN, stdin);
+    w[strcspn(w, "\n")] = '\0';/*The C library function strcspn() calculates the length of the number of characters before the 1st occurrence of character present in both the string. Syntax : strcspn(const char *str1, const char *str2)*/
+
+    printf("Introdu sirul cautat: ");
+    fgets(s, MAX_LEN, stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    printf("Introdu sirul inlocuit: ");
+    fgets(t, MAX_LEN, stdin);
+    t[strcspn(t, "\n")] = '\0';
+    
+    printf("sirul initial: %s\n", w);
+    inlocuieste(w, s, t);
+    printf("sirul final: %s\n", w);
+
+    return 0;
+}
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LEN 1000
+
+void inlocuieste(char *w, const char *s, const char *t) {
+    char result[MAX_LEN];
+    int i, j = 0, k;
+    int len_w = strlen(w);
+    int len_s = strlen(s);
+    int len_t = strlen(t);
+
+    for (i = 0; i < len_w; i++) {
+        if (strncmp(&w[i], s, len_s) == 0) {
+            for (k = 0; k < len_t; k++) {
+                result[j++] = t[k];
+            }
+            i += len_s - 1;
+        } else {
+
+            result[j++] = w[i];
+        }
+    }
+    result[j] = '\0';
+    strcpy(w, result);
+}
+
+int main() {
+    char w[MAX_LEN];
+    char s[MAX_LEN];
+    char t[MAX_LEN];
+
+    printf("Introdu sirul w: ");
+    fgets(w, MAX_LEN, stdin);
+    // w[strcspn(w, "\n")] = '\0';/*The C library function strcspn() calculates the length of the number of characters before the 1st occurrence of character present in both the string. Syntax : strcspn(const char *str1, const char *str2)*/
+
+    printf("Introdu sirul cautat: ");
+    fgets(s, MAX_LEN, stdin);
+    s[strlen(s)-1]='\0';
+    //s[s-strchr(s, '\n')] = '\0';
+
+    printf("Introdu sirul inlocuit: ");
+    fgets(t, MAX_LEN, stdin);
+     t[strlen(t)-1]='\0';
+    // t[strcspn(t, "\n")] = '\0';
+    
+    printf("sirul initial: %s\n", w);
+    inlocuieste(w, s, t);
+    printf("sirul final: %s\n ", w);
+
+    return 0;
+}
+
+

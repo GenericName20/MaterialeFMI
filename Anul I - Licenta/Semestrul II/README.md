@@ -1,1 +1,0 @@
-> **[SEE OPEN ISSUES](https://github.com/vlaxcs/FMI-INFO-S15-2024-2027/issues)**

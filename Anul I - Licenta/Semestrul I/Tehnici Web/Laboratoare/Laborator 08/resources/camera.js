@@ -1,9 +1,0 @@
-
-window.onload = function(){
-    
-    /* 
-    ... 
-    */
-}
-
-
