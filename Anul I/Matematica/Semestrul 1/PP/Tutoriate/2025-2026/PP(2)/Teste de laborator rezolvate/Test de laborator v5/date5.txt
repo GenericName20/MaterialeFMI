@@ -1,0 +1,11 @@
+UU1234AB, B 125 TAE, Toyota, Corrola Sedan, albastru
+UA1234XY, TR 12 ABC, Toyota, Corrola Sedan, rosu
+UU1234AM, NEINMATRICULAT, Dacia, Duster, alb
+UA1234XZ, IS 129 ANA, Toyota, Corrola Touring Sports, negru
+UU1234AM, NEINMATRICULAT, Dacia, Lodgy, alb
+AM1234BZ, NEINMATRICULAT, Volvo, EX90, gri
+XC1234DF, VN 101 CPP, Volvo, EX90, negru
+AC12JKL6, TR 75 CPP, Volvo, S60, verde
+PQ12KLS3, DJ 15 TEO, Ford, KA, gri
+MO1257JK, B 10 MIA, Ford, Puma, albastru
+MOASD57J, IS 11 CRI, Ford, Kuga, alb

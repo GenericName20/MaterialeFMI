@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1733835374 source:/home/tris/Desktop/Uniwork/Anul1/S1Lab PC I/Saptamana11/Problema1/main.c
+	<stdio.h>
+	<stdarg.h>
+	<string.h>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1729601139 source:/home/tris/Desktop/Anul1/S1L ProgrcalcI/problema1/main.cpp
+	<fstream>
+	<string>
+	<string.h>
+

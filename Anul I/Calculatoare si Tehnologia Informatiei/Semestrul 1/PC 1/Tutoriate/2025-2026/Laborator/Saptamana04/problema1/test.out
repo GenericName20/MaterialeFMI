@@ -1,0 +1,30 @@
+A- Afiseaza alfabetic
+B- Afiseaza buget dupa medie
+T - Afiseaza taxa dupa medie
+R - Afiseaza cei respinsi
+
+2 andrei
+8 8 9
+8
+Y Y
+
+1 bucata
+7 7 6
+6
+Y N
+
+3 cartof
+10 10 5
+9
+Y Y
+
+4 deletu
+3 3 4
+3
+N 0
+
+5 enterocolito
+10 10 10
+10
+Y Y
+

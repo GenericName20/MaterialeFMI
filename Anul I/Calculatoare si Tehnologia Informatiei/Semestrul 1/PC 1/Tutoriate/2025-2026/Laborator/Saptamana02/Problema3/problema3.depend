@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1761040568 source:c:\users\matei\desktop\problema3\main.c
+	<stdio.h>
+	<stdlib.h>
+

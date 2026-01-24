@@ -1,0 +1,4 @@
+    Line with trailing and leading whitespace    
+Line 1
+Line 2
+Hello, world!

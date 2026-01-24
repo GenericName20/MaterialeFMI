@@ -1,0 +1,8 @@
+10
+nume
+prenume
+2.000000
+9
+nume1
+prenume1
+10.900000

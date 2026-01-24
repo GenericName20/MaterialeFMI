@@ -1,0 +1,8 @@
+1111 Militaru Gigel 4A 5 matematica-informatica
+2222 Dascalescu Sorin 9B 10 stiinte-sociologice
+3333 Mili G 10C 9 stiinte-ale-naturii
+4444 Vladoiu Speranta 11C 9.5 matematica-informatica
+5555 Rusu Cristian 11C 10 matematica-informatica
+6666 Dobrovat Anca 10C 10 stiinte-ale-naturii
+7777 Big G 12B 10 stiinte-ale-naturii
+8888 Johnson Johnson 12B 5 stiinte-ale-naturii
